@@ -23,7 +23,7 @@ module.exports = {
     components: {
       securitySchemes: {
         okta: {
-          type: 'http',
+          type: 'https',
           scheme: 'bearer',
           bearerFormat: 'Okta idToken JWT',
         },
