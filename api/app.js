@@ -52,7 +52,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use(['/profile', '/profiles'], profileRouter);
 app.use('/customers', customersRouter);
-app.use('/groomers', groomerRouter);
+app.use(['/groomers', '/groomer'], groomerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
