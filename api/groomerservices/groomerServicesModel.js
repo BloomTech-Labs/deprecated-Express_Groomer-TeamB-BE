@@ -14,7 +14,7 @@ const create = async (data) => {
 
 const update = async (id, data) => {
   return await db('groomer_services')
-    .where('user_id', id)
+    .where('groomer_id', id)
     .first()
     .update(data)
     .returning('*');
