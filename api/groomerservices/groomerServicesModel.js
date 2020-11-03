@@ -6,8 +6,8 @@ const getAll = async () => {
 
 const getById = async (id) => {
   return await db('groomer_services')
-  .where('groomer_id', id)
-  .first().select('*');
+    .where('groomer_id', id)
+    .first().select('*');
 };
 
 const create = async (data) => {
