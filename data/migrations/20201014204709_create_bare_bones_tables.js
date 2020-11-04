@@ -37,6 +37,7 @@ exports.up = async (knex) => {
   await knex.schema.createTable('services', (table) => {
     table.increments('id');
     table.string('service_name').notNullable();
+    table.bigint('services_price');
   });
   await knex.schema.createTable('groomer_services', (table) => {
     table.bigint('groomer_id').references('id').inTable('groomer');
