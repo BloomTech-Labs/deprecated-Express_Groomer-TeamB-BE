@@ -11,6 +11,12 @@ const getById = async (id) => {
     .select('*');
 };
 
+const getServicesById = async (groomer_id, services_id) => {
+  return await db('groomer_services')
+    .where({ groomer_id: groomer_id, services_id: services_id })
+    .select('*');
+};
+
 const create = async (data) => {
   return await db('groomer_services').insert(data).returning('*');
 };
@@ -30,6 +36,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getServicesById,
   create,
   update,
   remove,

@@ -21,6 +21,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const data = await groomer_services.getServicesById(req.params.groomer_id);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/', authRequired, async (req, res) => {
   try {
     //checking to see if user already exists
