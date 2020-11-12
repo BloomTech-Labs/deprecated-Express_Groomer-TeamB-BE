@@ -1,5 +1,5 @@
 const express = require('express');
-const authRequired = require('../middleware/authRequired');
+//const authRequired = require('../middleware/authRequired');
 const groomer = require('./groomerModel');
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', authRequired, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     //checking to see if user already exists
     const user = await groomer.getById(req.body.user_id);
@@ -39,7 +39,7 @@ router.post('/', authRequired, async (req, res) => {
   }
 });
 
-router.put('/:id', authRequired, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     //checking to see if user already exists
     const user = await groomer.getById(req.params.id);
@@ -57,7 +57,7 @@ router.put('/:id', authRequired, async (req, res) => {
   }
 });
 
-router.delete('/:id', authRequired, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(404).json({ message: 'Missing required id.' });
