@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', authRequired, async (req, res) => {
   try {
-    const data = await petsModel.getAll();
+    const data = await petsModel.getAll(req.params.customer_id);
     res.status(200).json(data)
   } catch (err) {
     res.status(500).json({ message: "Error: 500"})
@@ -15,7 +15,7 @@ router.get('/', authRequired, async (req, res) => {
 
 router.get('/:id', authRequired, async (req, res) => {
   try {
-    const data = await petsModel.getById(req.params.id);
+    const data = await petsModel.getById(req.params.customer_id, req.params.id);
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ message: "Error: 500"})
@@ -24,7 +24,7 @@ router.get('/:id', authRequired, async (req, res) => {
 
 router.post('/', authRequired, async (req, res) => {
   try {
-    const pet = await petsModel.getById(req.body.id);
+    const pet = await petsModel.getById(req.params.customer_id, req.params.id;
     if (pet  === undefined) {
       const new_pet = await petsModel.create(req.body);
       res.status(200).json({ message: 'Pet profile added', Profile: new_pet});
@@ -38,7 +38,7 @@ router.post('/', authRequired, async (req, res) => {
 
 router.put('/:id', authRequired, async (req, res) => {
   try {
-    const pet = await petsModel.getById(req.params.id);
+    const pet = await petsModel.getById(req.params.customer_id, req.params.id);
     if (pet !== undefined) {
       const new_data = await petsModel.update(req.params.id, req.body);
       res.status(200).json({ message: "Pet updated", Profile: new_data});
