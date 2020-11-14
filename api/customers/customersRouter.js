@@ -2,9 +2,14 @@ const express = require('express');
 const authRequired = require('../middleware/authRequired');
 const customer = require('./customersModel.js');
 const router = express.Router();
-const cors = require('cors');
 
-router.get('/', authRequired, cors(), async (req, res) => {
+router.all('/', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://b.expressgroomer.dev');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
+
+router.get('/', authRequired, async (req, res) => {
   try {
     const data = await customer.getAll();
     res.status(200).json(data);
@@ -13,7 +18,7 @@ router.get('/', authRequired, cors(), async (req, res) => {
   }
 });
 
-router.get('/:id', authRequired, cors(), async (req, res) => {
+router.get('/:id', authRequired, async (req, res) => {
   try {
     const data = await customer.getById(req.params.id);
     res.status(200).json(data);
