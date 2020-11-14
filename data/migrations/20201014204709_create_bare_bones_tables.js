@@ -34,11 +34,18 @@ exports.up = async (knex) => {
     table.increments('id');
     table.bigint('pet_types_id').references('id').inTable('pet_types');
     table.string('customer_id').references('user_id').inTable('customer');
-    table.string('name').notNullable();
+    table.varchar('pet_name').notNull();
+    table.varchar('pet_picture');
+    table.varchar('pet_color');
+    table.varchar('pet_gender').notNull();
+    table.boolean('spay_neuter').notNull();
+    table.varchar('special_requests', 5000);
+    table.varchar('pet_temperment', 500);
+    table.boolean('shots_current').notNull();
   });
   await knex.schema.createTable('services', (table) => {
     table.increments('id');
-    table.string('service_name').notNullable();
+    table.string('service_name').notNull();
   });
   await knex.schema.createTable('groomer_services', (table) => {
     table.string('groomer_id').references('user_id').inTable('groomer');
