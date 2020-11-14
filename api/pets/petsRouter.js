@@ -24,7 +24,7 @@ router.get('/:id', authRequired, async (req, res) => {
 
 router.post('/', authRequired, async (req, res) => {
   try {
-    const pet = await petsModel.getById(req.params.customer_id, req.params.id;
+    const pet = await petsModel.getById(req.params.customer_id, req.params.id);
     if (pet  === undefined) {
       const new_pet = await petsModel.create(req.body);
       res.status(200).json({ message: 'Pet profile added', Profile: new_pet});
