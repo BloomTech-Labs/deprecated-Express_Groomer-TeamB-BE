@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 const db = require('../../data/db-config');
 
-const getAll = async (cust_id) => {
-  return await db('pets').where('customer_id', cust_id).select('*');
+const getAll = async (customer_id) => {
+  return await db('pets').where('customer_id', customer_id).select('*');
 };
 
 // This one chooses the pet by id, where the customer ID matches and the ID matches the required id
