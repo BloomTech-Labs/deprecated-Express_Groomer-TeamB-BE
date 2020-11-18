@@ -11,6 +11,7 @@ exports.up = async (knex) => {
     table.varchar('state').notNull();
     table.varchar('zip_code').notNull();
     table.varchar('country').notNull();
+    table.varchar('email').notNull();
     table.varchar('about', 5000);
     table.varchar('hours', 5000);
   });
