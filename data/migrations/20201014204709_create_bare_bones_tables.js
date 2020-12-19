@@ -41,7 +41,7 @@ exports.up = async (knex) => {
     table.varchar('pet_gender').notNull();
     table.boolean('spay_neuter').notNull();
     table.varchar('special_requests', 5000);
-    table.varchar('pet_temperment', 500);
+    table.varchar('pet_temperament', 500);
     table.boolean('shots_current').notNull();
   });
   await knex.schema.createTable('services', (table) => {
