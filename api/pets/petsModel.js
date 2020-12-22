@@ -7,41 +7,25 @@ const getAll = async (customer_id) => {
 
 // This one chooses the pet by id, where the customer ID matches and the ID matches the required id
 const getById = async (customer_id, id) => {
-  return db('pets').where({
-    customer_id: customer_id,
-    id: id,
-  }).first().select('*');
-};
-
-// get a customers pet by name
-const getByName = async (customer_id, petName) => {
-  return db('pets')
-    .where({ customer_id })
-    .where('pet_name', petName)
-    .select('id');
+  return await db('pets').where({customer_id: customer_id, id: id}).first().select('*');
 };
 
 const create = async (data) => {
-  const newPet =  await db('pets').insert(data).returning('*');
-  return newPet
+  return await db('pets').insert(data).returning('*')
 };
 
 const update = async (customer_id, id, data) => {
-  return db('pets').where({
-    customer_id: customer_id,
-    id: id,
-  }).first().update(data).returning('*');
+  return await db('pets').where({customer_id: customer_id, id: id}).first().update(data).returning('*');
 };
 
 const remove = async (customer_id, id) => {
-  return db('pets').where({ customer_id: customer_id, id: id }).del();
+  return await db('pets').where({customer_id: customer_id, id: id}).del();
 };
 
 module.exports = {
   getAll,
   getById,
-  getByName,
   create,
-  update,
+  update, 
   remove,
 };
