@@ -25,6 +25,7 @@ const customersRouter = require('./customers/customersRouter');
 const groomerRouter = require('./groomers/groomerRouter');
 const servicesRouter = require('./services/servicesRouter');
 const groomerServicesRouter = require('./groomerServices/groomerServicesRouter');
+const petRouter = require('./pets/petsRouter');
 
 const app = express();
 
@@ -36,7 +37,7 @@ process.on('unhandledRejection', (reason, p) => {
 app.use(
   '/api-docs',
   swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec, swaggerUIOptions)
+  swaggerUi.setup(swaggerSpec, swaggerUIOptions),
 );
 
 app.use(helmet());
@@ -44,7 +45,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: '*',
-  })
+  }),
 );
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
@@ -57,13 +58,14 @@ app.use('/customers', customersRouter);
 app.use('/groomers', groomerRouter);
 app.use(['/services', '/services'], servicesRouter);
 app.use(['/groomerservices', '/groomer_services'], groomerServicesRouter);
+app.use('/pets', petRouter);
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   if (err instanceof createError.HttpError) {
     res.locals.message = err.message;
     res.locals.status = err.statusCode;
