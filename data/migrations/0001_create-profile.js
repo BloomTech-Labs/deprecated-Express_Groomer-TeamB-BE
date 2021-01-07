@@ -1,6 +1,8 @@
 exports.up = (knex) => {
   return knex.schema
-    .raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+      // .raw Section causes an error
+      // Error: CREATE EXTENSION IF NOT EXISTS "uuid-ossp" - SQLITE_ERROR: near "EXTENSION": syntax error
+    // .raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
     .createTable('profiles', function (table) {
       table.string('id').notNullable().unique().primary();
       table.string('email');
